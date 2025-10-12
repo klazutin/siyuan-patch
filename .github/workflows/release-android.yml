@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: siyuan-kernel
-          path: ${{ matrix.config.kernel_path }}
+          path: ${{ github.workspace }}/siyuan-note/siyuan/kernel/mobile
 
       - name: Set up Go
         uses: actions/setup-go@v5
