@@ -105,7 +105,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: siyuan-kernel
-          path: ${{ github.workspace }}/siyuan-note/siyuan/kernel/mobile/
+          path: ${{ github.workspace }}/siyuan-note/siyuan-android/app/libs/
 
       - name: Decode Keystore
         id: decode_keystore
