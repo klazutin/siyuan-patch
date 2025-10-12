@@ -101,11 +101,11 @@ jobs:
         run: |
           zip -r ${{ github.workspace }}/siyuan-note/siyuan-android/app/src/main/assets/app.zip ./appearance ./guide ./stage ./changelogs
 
-      - name: Upload kernel
-        uses: actions/upload-artifact@v4
-        with:
-          name: siyuan-kernel
-          path: ${{ github.workspace }}/siyuan-note/siyuan-android/app/libs/
+#      - name: Upload kernel
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: siyuan-kernel
+#          path: ${{ github.workspace }}/siyuan-note/siyuan-android/app/libs/
 
       - name: Decode Keystore
         id: decode_keystore
