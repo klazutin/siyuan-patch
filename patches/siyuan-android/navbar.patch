@@ -1,0 +1,13 @@
+diff --git a/app/src/main/java/org/b3log/siyuan/MainActivity.java b/app/src/main/java/org/b3log/siyuan/MainActivity.java
+index e22493d..c1b7dc6 100644
+--- a/app/src/main/java/org/b3log/siyuan/MainActivity.java
++++ b/app/src/main/java/org/b3log/siyuan/MainActivity.java
+@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
+             ((ViewGroup) webView.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
+         }
+ 
+-        BarUtils.setNavBarVisibility(this, false);
++        // BarUtils.setNavBarVisibility(this, false);
+ 
+         // Fix https://github.com/siyuan-note/siyuan/issues/9726
+         // KeyboardUtils.fixAndroidBug5497(this);
