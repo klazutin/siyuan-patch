@@ -51,7 +51,7 @@ jobs:
           mkdir -p app/libs/
 
       - name: Upload kernel
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: siyuan-kernel
           path: ${{ matrix.config.kernel_path }}
