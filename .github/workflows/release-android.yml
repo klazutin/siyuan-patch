@@ -50,6 +50,12 @@ jobs:
           mkdir -p app/src/main/assets/
           mkdir -p app/libs/
 
+      - name: Upload kernel
+        uses: actions/upload-artifact@v3
+        with:
+          name: siyuan-kernel
+          path: ${{ matrix.config.kernel_path }}
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
