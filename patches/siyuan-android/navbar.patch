@@ -23,20 +23,6 @@ index 59221f7..f661e9c 100644
 +            // BarUtils.setNavBarVisibility(activity, false);
          });
      }
- 
-diff --git a/app/src/main/java/org/b3log/siyuan/MainActivity.java b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-index e22493d..cd31243 100644
---- a/app/src/main/java/org/b3log/siyuan/MainActivity.java
-+++ b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
-             ((ViewGroup) webView.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
-         }
- 
--        BarUtils.setNavBarVisibility(this, false);
-+//        BarUtils.setNavBarVisibility(this, false);
- 
-         // Fix https://github.com/siyuan-note/siyuan/issues/9726
-         // KeyboardUtils.fixAndroidBug5497(this);
 diff --git a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java b/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
 index aa077f3..6d042be 100644
 --- a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
