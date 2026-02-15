@@ -12,20 +12,20 @@ index d750c20..42b977e 100644
          final String channel = Utils.getChannel(this.getPackageManager());
          final Set<String> showAgreementChannels = new HashSet<>();
 diff --git a/app/src/main/java/org/b3log/siyuan/JSAndroid.java b/app/src/main/java/org/b3log/siyuan/JSAndroid.java
-index ed10f8f..adb889b 100644
+index 758649c..333edf1 100644
 --- a/app/src/main/java/org/b3log/siyuan/JSAndroid.java
 +++ b/app/src/main/java/org/b3log/siyuan/JSAndroid.java
-@@ -228,7 +228,7 @@ public final class JSAndroid {
- 
+@@ -269,7 +269,7 @@ public final class JSAndroid {
          activity.runOnUiThread(() -> {
-             UltimateBarX.statusBarOnly(activity).transparent().light(appearanceMode == 0).color(parseColor(color)).apply();
+             final int colorVal = parseColor(color);
+             UltimateBarX.statusBarOnly(activity).transparent().light(appearanceMode == 0).color(colorVal).apply();
 -            BarUtils.setNavBarVisibility(activity, false);
 +            // BarUtils.setNavBarVisibility(activity, false);
+             activity.webView.getRootView().setBackgroundColor(colorVal);
          });
      }
- 
 diff --git a/app/src/main/java/org/b3log/siyuan/MainActivity.java b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-index 1cfa545..1025292 100644
+index b91f160..7a0ac48 100644
 --- a/app/src/main/java/org/b3log/siyuan/MainActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/MainActivity.java
 @@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
