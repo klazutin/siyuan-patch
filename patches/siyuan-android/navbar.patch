@@ -1,18 +1,34 @@
+diff --git a/app/src/main/java/org/b3log/siyuan/AndroidBug5497Workaround.java b/app/src/main/java/org/b3log/siyuan/AndroidBug5497Workaround.java
+index 1c4825b..21b46c3 100644
+--- a/app/src/main/java/org/b3log/siyuan/AndroidBug5497Workaround.java
++++ b/app/src/main/java/org/b3log/siyuan/AndroidBug5497Workaround.java
+@@ -46,6 +46,11 @@ public class AndroidBug5497Workaround {
+             int imeHeight = 0;
+             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                 imeHeight = insets.getInsets(android.view.WindowInsets.Type.ime()).bottom;
++
++                // 保持系统导航栏可见时通过内边距避免内容被遮挡；
++                // 键盘弹出时 IME 高度已包含导航栏区域（视图底部即键盘顶部），底部内边距置 0 避免重复计算
++                final android.graphics.Insets navBars = insets.getInsets(android.view.WindowInsets.Type.navigationBars());
++                v.setPadding(navBars.left, v.getPaddingTop(), navBars.right, imeHeight > 0 ? 0 : navBars.bottom);
+             }
+ 
+             if (imeHeight > 0) { // imeHeight > 0 说明键盘弹出
 diff --git a/app/src/main/java/org/b3log/siyuan/BootActivity.java b/app/src/main/java/org/b3log/siyuan/BootActivity.java
-index b229776..726886b 100644
+index b229776..f6a52bb 100644
 --- a/app/src/main/java/org/b3log/siyuan/BootActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/BootActivity.java
-@@ -57,7 +57,7 @@ public class BootActivity extends AppCompatActivity {
+@@ -57,8 +57,6 @@ public class BootActivity extends AppCompatActivity {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_boot);
  
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
- 
+-
          final String channel = Utils.getChannel(this.getPackageManager());
          final Set<String> showAgreementChannels = new HashSet<>();
+         showAgreementChannels.add("cn");
 diff --git a/app/src/main/java/org/b3log/siyuan/JSAndroid.java b/app/src/main/java/org/b3log/siyuan/JSAndroid.java
-index 0ab8a3f..98fd4bf 100644
+index 0ab8a3f..8d61708 100644
 --- a/app/src/main/java/org/b3log/siyuan/JSAndroid.java
 +++ b/app/src/main/java/org/b3log/siyuan/JSAndroid.java
 @@ -453,7 +453,7 @@ public final class JSAndroid {
@@ -20,25 +36,25 @@ index 0ab8a3f..98fd4bf 100644
              final int colorVal = parseColor(color);
              UltimateBarX.statusBarOnly(activity).transparent().light(appearanceMode == 0).color(colorVal).apply();
 -            BarUtils.setNavBarVisibility(activity, false);
-+            BarUtils.setNavBarVisibility(activity, true);
++            ((android.view.View) activity.webView.getParent()).setBackgroundColor(colorVal);
              activity.webView.getRootView().setBackgroundColor(colorVal);
          });
      }
 diff --git a/app/src/main/java/org/b3log/siyuan/MainActivity.java b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-index 889a160..2cb69b1 100644
+index 889a160..1dd446e 100644
 --- a/app/src/main/java/org/b3log/siyuan/MainActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
+@@ -190,8 +190,6 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
              ((ViewGroup) webView.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
          }
  
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
- 
+-
          // Fix https://github.com/siyuan-note/siyuan/issues/9726
          AndroidBug5497Workaround.assistActivity(this);
+     }
 diff --git a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java b/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
-index 573506c..487ed10 100644
+index 573506c..42d3f2c 100644
 --- a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
 @@ -88,9 +88,9 @@ public class ShortcutActivity extends AppCompatActivity {
@@ -46,10 +62,10 @@ index 573506c..487ed10 100644
          });
          UltimateBarX.statusBarOnly(this).transparent().apply();
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
          ((ViewGroup) input.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
++        // 系统导航栏与软键盘遮挡处理
++        AndroidBug5497Workaround.assistActivity(this);
  
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
              // Full screen display in landscape mode on Android https://github.com/siyuan-note/siyuan/issues/14448
