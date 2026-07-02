@@ -1,55 +1,55 @@
 diff --git a/app/src/main/java/org/b3log/siyuan/BootActivity.java b/app/src/main/java/org/b3log/siyuan/BootActivity.java
-index b229776..726886b 100644
+index d750c20..42b977e 100644
 --- a/app/src/main/java/org/b3log/siyuan/BootActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/BootActivity.java
-@@ -57,7 +57,7 @@ public class BootActivity extends AppCompatActivity {
+@@ -60,7 +60,7 @@ public class BootActivity extends AppCompatActivity {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_boot);
  
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
++        // BarUtils.setNavBarVisibility(this, false);
  
          final String channel = Utils.getChannel(this.getPackageManager());
          final Set<String> showAgreementChannels = new HashSet<>();
 diff --git a/app/src/main/java/org/b3log/siyuan/JSAndroid.java b/app/src/main/java/org/b3log/siyuan/JSAndroid.java
-index 0ab8a3f..98fd4bf 100644
+index 758649c..333edf1 100644
 --- a/app/src/main/java/org/b3log/siyuan/JSAndroid.java
 +++ b/app/src/main/java/org/b3log/siyuan/JSAndroid.java
-@@ -453,7 +453,7 @@ public final class JSAndroid {
+@@ -269,7 +269,7 @@ public final class JSAndroid {
          activity.runOnUiThread(() -> {
              final int colorVal = parseColor(color);
              UltimateBarX.statusBarOnly(activity).transparent().light(appearanceMode == 0).color(colorVal).apply();
 -            BarUtils.setNavBarVisibility(activity, false);
-+            BarUtils.setNavBarVisibility(activity, true);
++            // BarUtils.setNavBarVisibility(activity, false);
              activity.webView.getRootView().setBackgroundColor(colorVal);
          });
      }
 diff --git a/app/src/main/java/org/b3log/siyuan/MainActivity.java b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-index 889a160..2cb69b1 100644
+index b91f160..7a0ac48 100644
 --- a/app/src/main/java/org/b3log/siyuan/MainActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/MainActivity.java
-@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
+@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements com.blankj.utilco
              ((ViewGroup) webView.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
          }
  
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
++        // BarUtils.setNavBarVisibility(this, false);
  
          // Fix https://github.com/siyuan-note/siyuan/issues/9726
          AndroidBug5497Workaround.assistActivity(this);
 diff --git a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java b/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
-index 573506c..487ed10 100644
+index aa077f3..6d042be 100644
 --- a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
-@@ -88,9 +88,9 @@ public class ShortcutActivity extends AppCompatActivity {
-             return null;
-         });
+@@ -65,9 +65,9 @@ public class ShortcutActivity extends AppCompatActivity {
+ 
+         final EditText input = findViewById(R.id.full_screen_input);
          UltimateBarX.statusBarOnly(this).transparent().apply();
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
++        // BarUtils.setNavBarVisibility(this, false);
          ((ViewGroup) input.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
 -        BarUtils.setNavBarVisibility(this, false);
-+        BarUtils.setNavBarVisibility(this, true);
++        // BarUtils.setNavBarVisibility(this, false);
  
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
              // Full screen display in landscape mode on Android https://github.com/siyuan-note/siyuan/issues/14448
