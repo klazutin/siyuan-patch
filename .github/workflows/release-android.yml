@@ -121,7 +121,7 @@ jobs:
           GOPATH: ${{ github.workspace }}/go
 
       - name: Building Android Kernel
-        run: gomobile bind -tags fts5 -ldflags "-s -w" -v -o "${{ matrix.config.kernel_path }}" -target android/arm64 -androidapi 26 ./
+        run: gomobile bind -tags "fts5 sqlcipher" -ldflags "-s -w" -v -o "${{ matrix.config.kernel_path }}" -target android/arm64 -androidapi 26 ./
         working-directory: ${{ github.workspace }}/siyuan-note/siyuan/kernel/mobile
         env:
           GOPATH: ${{ github.workspace }}/go

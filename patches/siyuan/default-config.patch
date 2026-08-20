@@ -1,22 +1,7 @@
-diff --git forkSrcPrefix/kernel/conf/appearance.go forkDstPrefix/kernel/conf/appearance.go
-index c3de55fa30ddf06238dad328c58af8221224d466..d48274f04afcc69848408a173920aa7634698e8c 100644
---- forkSrcPrefix/kernel/conf/appearance.go
-+++ forkDstPrefix/kernel/conf/appearance.go
-@@ -48,8 +48,8 @@ func NewAppearance() *Appearance {
- 		Icon:                "litheness",
- 		CodeBlockThemeLight: "github",
- 		CodeBlockThemeDark:  "base16/dracula",
--		Lang:                "en",
--		CloseButtonBehavior: 0,
-+		Lang:                "zh_CN",
-+		CloseButtonBehavior: 1,
- 		HideToolbar:         true,
- 		HideStatusBar:       false,
- 		StatusBar:           &util.StatusBar{},
-diff --git forkSrcPrefix/kernel/conf/account.go forkDstPrefix/kernel/conf/account.go
-index 5e3b51fb8f9d2944a2cacef66cdc3bc9bd365c5a..d4f4e00dea010730b557f7c122b624fb015b1021 100644
---- forkSrcPrefix/kernel/conf/account.go
-+++ forkDstPrefix/kernel/conf/account.go
+diff --git a/kernel/conf/account.go b/kernel/conf/account.go
+index c4590e22e..133208f71 100644
+--- a/kernel/conf/account.go
++++ b/kernel/conf/account.go
 @@ -23,7 +23,7 @@ type Account struct {
  
  func NewAccount() *Account {
@@ -27,11 +12,26 @@ index 5e3b51fb8f9d2944a2cacef66cdc3bc9bd365c5a..d4f4e00dea010730b557f7c122b624fb
 +		DisplayVIP:   false,
  	}
  }
-diff --git forkSrcPrefix/kernel/conf/sync.go forkDstPrefix/kernel/conf/sync.go
-index 1f23e9642ca641c0c73f9628f3c6e7695ea63cbb..7e40b4375a4a4543858b4b395aabd5c3cb5536ac 100644
---- forkSrcPrefix/kernel/conf/sync.go
-+++ forkDstPrefix/kernel/conf/sync.go
-@@ -37,8 +37,8 @@ func NewSync() *Sync {
+diff --git a/kernel/conf/appearance.go b/kernel/conf/appearance.go
+index 908de478f..c403c1587 100644
+--- a/kernel/conf/appearance.go
++++ b/kernel/conf/appearance.go
+@@ -50,8 +50,8 @@ func NewAppearance() *Appearance {
+ 		Icon:                "litheness",
+ 		CodeBlockThemeLight: "github",
+ 		CodeBlockThemeDark:  "base16/dracula",
+-		Lang:                "en",
+-		CloseButtonBehavior: 0,
++		Lang:                "zh_CN",
++		CloseButtonBehavior: 1,
+ 		HideToolbar:         true,
+ 		HideStatusBar:       false,
+ 		StatusBar:           &util.StatusBar{},
+diff --git a/kernel/conf/sync.go b/kernel/conf/sync.go
+index b076c5e7e..662b300d4 100644
+--- a/kernel/conf/sync.go
++++ b/kernel/conf/sync.go
+@@ -38,8 +38,8 @@ func NewSync() *Sync {
  		Enabled:             false,
  		Perception:          false,
  		Mode:                1,
@@ -40,5 +40,5 @@ index 1f23e9642ca641c0c73f9628f3c6e7695ea63cbb..7e40b4375a4a4543858b4b395aabd5c3
 +		GenerateConflictDoc: true,
 +		Provider:            ProviderS3,
  		Interval:            30,
+ 		LAN:                 &LANSync{MaxConcurrentReqs: 16},
  	}
- }
