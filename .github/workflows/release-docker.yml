@@ -45,9 +45,7 @@ jobs:
           git clone --branch ${{ github.event.inputs.version }} https://github.com/siyuan-note/siyuan.git
           cd siyuan
 
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan/disable-update.patch
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan/default-config.patch
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan/mock-vip-user.patch
+          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan.patch
 
           git status
 

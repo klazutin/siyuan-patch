@@ -32,9 +32,8 @@ jobs:
           git clone --branch ${{ github.event.inputs.version }} https://github.com/siyuan-note/siyuan.git
           cd siyuan
 
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan/disable-update.patch
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan/default-config.patch
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan/mock-vip-user.patch
+          git clone --branch ${{ github.event.inputs.version }} https://github.com/siyuan-note/siyuan.git
+
 
           git status
 
@@ -43,7 +42,7 @@ jobs:
           git clone --branch ${{ github.event.inputs.version }} https://github.com/siyuan-note/siyuan-android.git
           cd siyuan-android
 
-          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan-android/debug-build.patch
+          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan-android.patch
 
           git apply -v ${{ github.workspace }}/siyuan-note/patches/siyuan-android/navbar.patch
 
@@ -151,7 +150,7 @@ jobs:
 
       - name: Decode Keystore
         id: decode_keystore
-        uses: timheuer/base64-to-file@v1.2
+        uses: timheuer/base64-to-file@v2
         with:
           fileName: "debug.jks"
           fileDir: ${{ github.workspace }}/siyuan-note/siyuan-android/keystore
