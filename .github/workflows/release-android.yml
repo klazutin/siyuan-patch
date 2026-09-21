@@ -32,8 +32,7 @@ jobs:
           git clone --branch ${{ github.event.inputs.version }} https://github.com/siyuan-note/siyuan.git
           cd siyuan
 
-          git clone --branch ${{ github.event.inputs.version }} https://github.com/siyuan-note/siyuan.git
-
+          git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan.patch
 
           git status
 
