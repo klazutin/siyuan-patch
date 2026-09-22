@@ -96,4 +96,16 @@ if [ -f "$WORKAROUND" ]; then
     fi
 fi
 
-echo "==> Successfully applied navbar modifications."
+# 5. shortcuts.xml: update targetPackage to match debug package name
+SHORTCUTS_XML="$TARGET_DIR/app/src/main/res/xml/shortcuts.xml"
+if [ -f "$SHORTCUTS_XML" ]; then
+    echo "--> Ensuring debug targetPackage in shortcuts.xml..."
+    if grep -q 'android:targetPackage="org\.b3log\.siyuan"' "$SHORTCUTS_XML"; then
+        awk '{gsub(/android:targetPackage="org\.b3log\.siyuan"/, "android:targetPackage=\"org.b3log.siyuan.debug\""); print}' "$SHORTCUTS_XML" > "$SHORTCUTS_XML.tmp" && mv "$SHORTCUTS_XML.tmp" "$SHORTCUTS_XML"
+        echo "    ✓ Updated targetPackage to org.b3log.siyuan.debug in shortcuts.xml"
+    else
+        echo "    - targetPackage already up to date in shortcuts.xml"
+    fi
+fi
+
+echo "==> Successfully applied modifications."
