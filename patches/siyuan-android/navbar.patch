@@ -57,15 +57,13 @@ diff --git a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java b/app/src/
 index 573506c..42d3f2c 100644
 --- a/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
 +++ b/app/src/main/java/org/b3log/siyuan/ShortcutActivity.java
-@@ -88,9 +88,9 @@ public class ShortcutActivity extends AppCompatActivity {
+@@ -88,9 +88,7 @@ public class ShortcutActivity extends AppCompatActivity {
              return null;
          });
          UltimateBarX.statusBarOnly(this).transparent().apply();
 -        BarUtils.setNavBarVisibility(this, false);
          ((ViewGroup) input.getParent()).setPadding(0, UltimateBarX.getStatusBarHeight(), 0, 0);
 -        BarUtils.setNavBarVisibility(this, false);
-+        // 系统导航栏与软键盘遮挡处理
-+        AndroidBug5497Workaround.assistActivity(this);
  
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
              // Full screen display in landscape mode on Android https://github.com/siyuan-note/siyuan/issues/14448

@@ -28,22 +28,15 @@ find "$SIYUAN_JAVA_DIR" -maxdepth 1 -name "*.java" -type f | sort | while read -
     fi
 done
 
-# 2. ShortcutActivity.java: add AndroidBug5497Workaround.assistActivity(this)
+# 2. ShortcutActivity.java: ensure AndroidBug5497Workaround is NOT called
+# ShortcutActivity uses a native LinearLayout root view with adjustResize; calling
+# AndroidBug5497Workaround causes a ClassCastException (LinearLayout cannot be cast to FrameLayout).
 SHORTCUT_ACTIVITY="$SIYUAN_JAVA_DIR/ShortcutActivity.java"
 if [ -f "$SHORTCUT_ACTIVITY" ]; then
-    echo "--> Ensuring AndroidBug5497Workaround in ShortcutActivity.java..."
-    if ! grep -q "AndroidBug5497Workaround.assistActivity" "$SHORTCUT_ACTIVITY"; then
-        awk '
-        {
-            print $0
-            if ($0 ~ /input\.getParent\(\)\)\.setPadding/) {
-                print "        // 系统导航栏与软键盘遮挡处理"
-                print "        AndroidBug5497Workaround.assistActivity(this);"
-            }
-        }' "$SHORTCUT_ACTIVITY" > "$SHORTCUT_ACTIVITY.tmp" && mv "$SHORTCUT_ACTIVITY.tmp" "$SHORTCUT_ACTIVITY"
-        echo "    ✓ Added AndroidBug5497Workaround to ShortcutActivity.java"
-    else
-        echo "    - AndroidBug5497Workaround already present in ShortcutActivity.java"
+    if grep -q "AndroidBug5497Workaround.assistActivity" "$SHORTCUT_ACTIVITY"; then
+        echo "--> Removing incompatible AndroidBug5497Workaround from ShortcutActivity.java..."
+        awk '!/AndroidBug5497Workaround\.assistActivity/ && !/\/\/ 系统导航栏与软键盘遮挡处理/' "$SHORTCUT_ACTIVITY" > "$SHORTCUT_ACTIVITY.tmp" && mv "$SHORTCUT_ACTIVITY.tmp" "$SHORTCUT_ACTIVITY"
+        echo "    ✓ Removed AndroidBug5497Workaround from ShortcutActivity.java"
     fi
 fi
 
