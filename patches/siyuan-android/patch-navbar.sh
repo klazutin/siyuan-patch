@@ -58,6 +58,7 @@ if [ -f "$JS_ANDROID" ]; then
     fi
 fi
 
+: <<'END'
 # 4. AndroidBug5497Workaround.java: add navigationBars insets padding
 WORKAROUND="$SIYUAN_JAVA_DIR/AndroidBug5497Workaround.java"
 if [ -f "$WORKAROUND" ]; then
@@ -88,6 +89,7 @@ if [ -f "$WORKAROUND" ]; then
         echo "    - navigationBars insets handling already present in AndroidBug5497Workaround.java"
     fi
 fi
+END
 
 # 5. shortcuts.xml: update targetPackage to match debug package name
 SHORTCUTS_XML="$TARGET_DIR/app/src/main/res/xml/shortcuts.xml"
