@@ -43,7 +43,7 @@ jobs:
 
           git apply --3way ${{ github.workspace }}/siyuan-note/patches/siyuan-android.patch
 
-          bash ${{ github.workspace }}/siyuan-note/patches/siyuan-android/patch-navbar.sh .
+          bash ${{ github.workspace }}/siyuan-note/patches/siyuan-android.sh .
           git diff --stat
 
           mkdir -p app/src/main/assets/
