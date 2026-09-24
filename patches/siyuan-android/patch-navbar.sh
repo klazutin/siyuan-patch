@@ -28,6 +28,7 @@ find "$SIYUAN_JAVA_DIR" -maxdepth 1 -name "*.java" -type f | sort | while read -
     fi
 done
 
+: <<'END'
 # 2. ShortcutActivity.java: ensure AndroidBug5497Workaround is NOT called
 # ShortcutActivity uses a native LinearLayout root view with adjustResize; calling
 # AndroidBug5497Workaround causes a ClassCastException (LinearLayout cannot be cast to FrameLayout).
@@ -39,6 +40,7 @@ if [ -f "$SHORTCUT_ACTIVITY" ]; then
         echo "    ✓ Removed AndroidBug5497Workaround from ShortcutActivity.java"
     fi
 fi
+
 
 # 3. JSAndroid.java: ensure webView parent background color is set
 JS_ANDROID="$SIYUAN_JAVA_DIR/JSAndroid.java"
@@ -58,7 +60,7 @@ if [ -f "$JS_ANDROID" ]; then
     fi
 fi
 
-: <<'END'
+
 # 4. AndroidBug5497Workaround.java: add navigationBars insets padding
 WORKAROUND="$SIYUAN_JAVA_DIR/AndroidBug5497Workaround.java"
 if [ -f "$WORKAROUND" ]; then
